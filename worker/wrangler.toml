@@ -1,0 +1,9 @@
+name = "screen-vision-api"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+# Variáveis de ambiente (configure no dashboard do Cloudflare)
+# GEMINI_API_KEY = "sua-chave-aqui"
+
+[vars]
+ALLOWED_ORIGIN = "*"
