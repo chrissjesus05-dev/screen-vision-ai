@@ -17,6 +17,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
     // Análise sob demanda
     requestAnalysis: () => ipcRenderer.send('request-analysis'),
 
+    // Audio processing
+    speedUpAudio: (dataUrl, speedMultiplier) => ipcRenderer.invoke('speed-up-audio', dataUrl, speedMultiplier),
+
     // Listeners
     onChatMessage: (callback) => {
         ipcRenderer.on('chat-message', (_, data) => callback(data));

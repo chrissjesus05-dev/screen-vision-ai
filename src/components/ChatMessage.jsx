@@ -21,16 +21,16 @@ function ChatMessage({ message }) {
                     {icons[role]}
                 </div>
             )}
-            <div
-                className="message-content"
-                dangerouslySetInnerHTML={
-                    role === 'assistant'
-                        ? { __html: formattedContent }
-                        : undefined
-                }
-            >
-                {role !== 'assistant' && <p>{content}</p>}
-            </div>
+            {role === 'assistant' ? (
+                <div
+                    className="message-content"
+                    dangerouslySetInnerHTML={{ __html: formattedContent }}
+                />
+            ) : (
+                <div className="message-content">
+                    <p>{content}</p>
+                </div>
+            )}
             {role === 'user' && (
                 <div className="message-icon">
                     {icons[role]}
@@ -41,3 +41,4 @@ function ChatMessage({ message }) {
 }
 
 export default ChatMessage;
+

@@ -51,6 +51,11 @@ function ScreenPreview({
                     muted
                     playsInline
                 />
+                {isAnalyzing && (
+                    <div className="scanning-overlay">
+                        <div className="scan-line"></div>
+                    </div>
+                )}
                 <canvas ref={canvasRef} style={{ display: 'none' }} />
             </div>
         </section>

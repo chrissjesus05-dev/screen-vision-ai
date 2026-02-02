@@ -1,24 +1,153 @@
 /* ===== Screen Vision AI - Global Styles ===== */
 
+/* Import animations and micro-interactions */
+@import './styles/animations.css';
+
+/* ===== DYNAMIC LAYOUTS ===== */
+/* Applied by customizationService.applyLayout() */
+/* Body classes: layout-single, layout-sidebar, layout-dashboard, layout-minimal */
+
+/* SINGLE Layout (layout-single) - Default grid */
+body.layout-single .content-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px !important;
+}
+
+/* SIDEBAR Layout (layout-sidebar) */
+body.layout-sidebar .content-grid {
+    grid-template-columns: 1fr 400px !important;
+    gap: 20px !important;
+}
+
+body.layout-sidebar .screen-section {
+    order: 1;
+}
+
+body.layout-sidebar .chat-section {
+    order: 2;
+    min-height: 600px;
+}
+
+/* DASHBOARD Layout (layout-dashboard) */
+body.layout-dashboard .main-screen {
+    max-width: none !important;
+}
+
+body.layout-dashboard .content-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: auto auto;
+    gap: 16px !important;
+}
+
+body.layout-dashboard .screen-section {
+    grid-column: 1;
+    grid-row: 1 / 3;
+}
+
+body.layout-dashboard .chat-section {
+    grid-column: 2;
+    grid-row: 1 / 3;
+}
+
+/* MINIMAL Layout (layout-minimal) */
+body.layout-minimal .main-screen {
+    max-width: 1000px !important;
+    padding: 12px !important;
+}
+
+body.layout-minimal .header {
+    padding: 10px 16px !important;
+    margin-bottom: 12px !important;
+}
+
+body.layout-minimal .content-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    max-width: 900px !important;
+    margin: 0 auto !important;
+}
+
+body.layout-minimal .screen-section,
+body.layout-minimal .chat-section {
+    border-radius: 12px !important;
+}
+
+body.layout-minimal .audio-section {
+    max-width: 900px !important;
+    margin: 12px auto 0 !important;
+    padding: 12px !important;
+}
+
+body.layout-minimal .footer {
+    margin-top: 12px !important;
+    font-size: 0.75rem !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+
+    body.layout-sidebar .content-grid,
+    body.layout-dashboard .content-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    body.layout-sidebar .screen-section,
+    body.layout-sidebar .chat-section,
+    body.layout-dashboard .screen-section,
+    body.layout-dashboard .chat-section {
+        order: initial;
+        grid-column: 1;
+        grid-row: auto;
+    }
+}
+
+/* ===== END LAYOUTS ===== */
+
 :root {
-    --bg-primary: #0a0a0f;
-    --bg-secondary: #12121a;
-    --bg-tertiary: #1a1a25;
-    --bg-hover: #1e1e2a;
+    /* [CUSTOMIZATION] Dynamic colors - set by customizationService.applyTheme() */
+    --color-primary: #4F46E5;
+    --color-secondary: #06B6D4;
+    --color-accent: #F59E0B;
+    --color-background: #0F172A;
+    --color-surface: #1E293B;
+    --color-text: #F1F5F9;
+    --color-text-secondary: #94A3B8;
 
-    --text-primary: #ffffff;
-    --text-secondary: #a0a0b0;
-    --text-muted: #6b6b7a;
+    /* [ACCESSIBILITY] Font size - set by customizationService.applyFontSize() */
+    --base-font-size: 16px;
 
-    --accent-primary: #6366f1;
-    --accent-secondary: #818cf8;
-    --accent-glow: rgba(99, 102, 241, 0.3);
+    /* [ACCESSIBILITY] Animation duration - set by customizationService.applyReduceMotion() */
+    --animation-duration: 0.3s;
+
+    /* Derived variables - calculated and set by customizationService.applyTheme() */
+    --bg-primary: #0F172A;
+    --bg-secondary: #1E293B;
+    --bg-tertiary: #2D3748;
+    --bg-hover: #374151;
+
+    --text-primary: #F1F5F9;
+    --text-secondary: #94A3B8;
+    --text-muted: #64748B;
+
+    --accent-primary: #4F46E5;
+    --accent-secondary: #06B6D4;
+    --accent-glow: rgba(79, 70, 229, 0.3);
 
     --success: #10b981;
     --warning: #f59e0b;
     --danger: #ef4444;
 
     --border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* [LIGHT MODE] Override colors when data-theme="light" */
+[data-theme="light"] {
+    --color-background: #FFFFFF;
+    --color-surface: #F8FAFC;
+    --color-text: #0F172A;
+    --color-text-secondary: #64748B;
+
+    --border-color: rgba(0, 0, 0, 0.08);
 }
 
 * {
@@ -28,7 +157,7 @@
 }
 
 html {
-    font-size: 16px;
+    font-size: var(--base-font-size);
 }
 
 body {
@@ -46,14 +175,71 @@ body::before {
     position: fixed;
     inset: 0;
     background:
-        radial-gradient(ellipse at 20% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.06) 0%, transparent 50%);
+        radial-gradient(ellipse at 20% 20%, color-mix(in srgb, var(--color-primary) 8%, transparent) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, color-mix(in srgb, var(--color-secondary) 6%, transparent) 0%, transparent 50%);
     pointer-events: none;
     z-index: -1;
 }
 
 #root {
     min-height: 100vh;
+}
+
+/* Shortcuts Footer */
+.audio-shortcuts {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.shortcut-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: all 0.2s;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.shortcut-btn:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+}
+
+.shortcut-btn:active {
+    transform: translateY(0);
+}
+
+.shortcut-btn kbd {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: monospace;
+    font-size: 0.8em;
+    color: var(--text-primary);
+    box-shadow: 0 2px 0 var(--border-color);
+}
+
+.shortcut-btn:hover kbd {
+    background: var(--bg-tertiary);
+    border-color: var(--text-secondary);
+}
+
+.separator {
+    color: var(--border-color);
+    font-weight: 300;
 }
 
 /* Scrollbar */

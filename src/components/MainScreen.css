@@ -47,16 +47,61 @@
     border-radius: 20px;
 }
 
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-settings,
+.btn-theme,
+.btn-layout {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-settings:hover,
+.btn-theme:hover,
+.btn-layout:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.btn-settings {
+    width: 42px;
+    height: 42px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-settings:hover {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    transform: scale(1.05);
+}
+
 .status-dot {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: #ef4444;
+    background: var(--danger);
     animation: pulse 2s infinite;
 }
 
 .status-indicator.connected .status-dot {
-    background: #10b981;
+    background: var(--success);
 }
 
 .status-indicator.streaming .status-dot {
@@ -69,12 +114,26 @@
     color: var(--text-secondary);
 }
 
+/* DEFAULT .content-grid styles moved to index.css and controlled by layout classes on body */
+/* See: body.layout-single, body.layout-sidebar, body.layout-dashboard, body.layout-minimal */
 .content-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    /* grid-template-columns and gap are now controlled by layout classes in index.css */
     flex: 1;
     min-height: 500px;
+
+    /* Default fallback (Single layout) */
+}
+
+/* Container wrappers for Reordering/Resizing */
+.screen-preview-container,
+.chat-window-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    min-height: 0;
+    /* Prevent flex overflow issues */
 }
 
 .footer {
@@ -100,5 +159,101 @@
 @media (max-width: 1024px) {
     .content-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Audio Section */
+.audio-section {
+    margin-top: 16px;
+    padding: 16px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+}
+
+.audio-shortcuts {
+    margin-top: 12px;
+    padding: 12px;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.audio-shortcuts kbd {
+    display: inline-block;
+    padding: 4px 8px;
+    margin: 0 4px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: var(--accent-secondary);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.audio-shortcuts {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.shortcut-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.shortcut-btn:hover {
+    background: var(--bg-secondary);
+    border-color: var(--accent-primary);
+    color: var(--text-primary);
+}
+
+.shortcut-btn.recording-active {
+    background: rgba(220, 38, 38, 0.1);
+    border-color: var(--danger);
+    color: var(--danger);
+    box-shadow: 0 0 10px rgba(220, 38, 38, 0.2);
+    animation: button-pulse 1.5s infinite;
+}
+
+.shortcut-btn kbd {
+    display: inline-block;
+    padding: 4px 8px;
+    margin-left: 6px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.separator {
+    color: var(--border-color);
+}
+
+@keyframes button-pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 5px rgba(220, 38, 38, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 15px rgba(220, 38, 38, 0.5);
     }
 }

@@ -1,0 +1,174 @@
+.gem-selector {
+    position: relative;
+}
+
+.gem-selector-trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 0.9rem;
+}
+
+.gem-selector-trigger:hover {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
+}
+
+.gem-icon {
+    font-size: 1.1rem;
+}
+
+.gem-name {
+    font-weight: 500;
+}
+
+.gem-arrow {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-left: 4px;
+}
+
+.gem-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 320px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+    overflow: hidden;
+    animation: dropdownIn 0.2s ease;
+}
+
+@keyframes dropdownIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.gem-dropdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-tertiary);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.gem-new-btn {
+    padding: 6px 12px;
+    background: var(--accent-primary);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.gem-new-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+}
+
+.gem-list {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 8px;
+}
+
+.gem-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 10px;
+    margin-bottom: 4px;
+    transition: all 0.15s;
+}
+
+.gem-item:hover {
+    background: var(--bg-hover);
+}
+
+.gem-item.active {
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid var(--accent-primary);
+}
+
+.gem-item-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    text-align: left;
+}
+
+.gem-item-icon {
+    font-size: 1.5rem;
+}
+
+.gem-item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.gem-item-name {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.gem-item-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.gem-badge {
+    padding: 3px 8px;
+    background: var(--bg-hover);
+    border-radius: 6px;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+}
+
+.gem-item-edit {
+    padding: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all 0.15s;
+    font-size: 0.9rem;
+}
+
+.gem-item:hover .gem-item-edit {
+    opacity: 1;
+}
+
+.gem-item-edit:hover {
+    transform: scale(1.1);
+}

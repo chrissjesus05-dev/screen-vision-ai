@@ -1,0 +1,284 @@
+.gem-editor-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease;
+}
+
+.gem-editor-modal {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    width: 95%;
+    max-width: 700px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.gem-editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-tertiary);
+}
+
+.gem-editor-header h2 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.gem-editor-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.gem-info-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.icon-selector {
+    position: relative;
+}
+
+.icon-btn {
+    width: 56px;
+    height: 56px;
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border-color);
+    border-radius: 14px;
+    font-size: 28px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.icon-btn:hover {
+    border-color: var(--accent-primary);
+    transform: scale(1.05);
+}
+
+.icon-picker {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 8px;
+    padding: 8px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.icon-option {
+    width: 40px;
+    height: 40px;
+    background: var(--bg-hover);
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.icon-option:hover {
+    background: var(--accent-primary);
+    transform: scale(1.1);
+}
+
+.icon-option.active {
+    background: var(--accent-primary);
+}
+
+.gem-name-input {
+    flex: 1;
+}
+
+.gem-name-input input {
+    width: 100%;
+    padding: 16px 18px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.gem-name-input input:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+}
+
+.description-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.description-input:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+}
+
+.prompt-tabs {
+    display: flex;
+    gap: 8px;
+    padding: 4px;
+    background: var(--bg-tertiary);
+    border-radius: 12px;
+}
+
+.prompt-tabs .tab {
+    flex: 1;
+    padding: 10px 16px;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.15s;
+}
+
+.prompt-tabs .tab.active {
+    background: var(--accent-primary);
+    color: white;
+}
+
+.prompt-editor {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 250px;
+}
+
+.prompt-help {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.prompt-help code {
+    padding: 3px 8px;
+    background: var(--bg-hover);
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: var(--accent-secondary);
+}
+
+.prompt-editor textarea {
+    flex: 1;
+    padding: 16px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    line-height: 1.5;
+    resize: none;
+    min-height: 200px;
+}
+
+.prompt-editor textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+}
+
+.gem-editor-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 24px;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-tertiary);
+}
+
+.footer-actions {
+    display: flex;
+    gap: 12px;
+    margin-left: auto;
+}
+
+.btn-delete {
+    padding: 10px 16px;
+    background: transparent;
+    border: 1px solid #ef4444;
+    border-radius: 10px;
+    color: #ef4444;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.btn-delete:hover {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.btn-cancel {
+    padding: 10px 20px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.btn-cancel:hover {
+    background: var(--bg-hover);
+}
+
+.btn-save {
+    padding: 10px 24px;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.btn-save:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
