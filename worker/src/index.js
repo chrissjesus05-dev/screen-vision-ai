@@ -7,20 +7,39 @@ const GEMINI_API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models
 const MODEL = 'gemini-2.0-flash-exp';
 
 /**
- * Configurações de CORS
+ * Origens permitidas para CORS
  */
-const corsHeaders = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    'Access-Control-Max-Age': '86400',
-};
+const ALLOWED_ORIGINS = [
+    'http://localhost:5173',  // Vite dev server
+    'http://localhost:3000',  // Fallback dev
+    'app://.', // Electron production
+    'file://' // Electron file protocol
+];
+
+/**
+ * Gera headers CORS baseado na origem da requisição
+ */
+function getCorsHeaders(request) {
+    const origin = request.headers.get('Origin') || '';
+    const isAllowed = ALLOWED_ORIGINS.some(allowed =>
+        origin.startsWith(allowed) || origin === allowed
+    );
+
+    return {
+        'Access-Control-Allow-Origin': isAllowed ? origin : ALLOWED_ORIGINS[0],
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        'Access-Control-Max-Age': '86400',
+    };
+}
 
 /**
  * Handler principal do Worker
  */
 export default {
     async fetch(request, env, ctx) {
+        const corsHeaders = getCorsHeaders(request);
+
         // Handle CORS preflight
         if (request.method === 'OPTIONS') {
             return new Response(null, { headers: corsHeaders });
